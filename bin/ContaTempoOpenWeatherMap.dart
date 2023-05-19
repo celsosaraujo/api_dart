@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dio/dio.dart';
 
 void main() async {
@@ -22,8 +24,22 @@ void main() async {
   final response = await dio.get(uri.toString());
 
   if (response.statusCode == 200) {
-    print(response.data);
+    print("Temperatura em ${response.data["name"]} "
+                         "no dia ${timestampToData(response.data["dt"])} "                         
+                         "${ kelvinToCelsius( response.data["main"]["temp"] ) }" );    
   } else {
     print('Erro ao fazer requisição: ${response.statusCode}');
   }
+}
+
+String kelvinToCelsius(double tempKelvin){
+  double tempCelsius = tempKelvin - 273.00;
+  return tempCelsius.toStringAsPrecision(4);  
+}
+
+String timestampToData( int timestamp) {
+
+  DateTime data = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000, isUtc: true);
+  DateTime dataLocal = data.toLocal();
+  return dataLocal.toString().substring(0,10);
 }
