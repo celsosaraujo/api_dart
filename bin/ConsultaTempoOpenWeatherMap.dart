@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 void main() async {
   
   //https://openweathermap.org/
-  //Endpoint = 'https://api.openweathermap.org/data/2.5/weather?lat=-22.2138900&lon=-49.9458300&appid=684092e38c36b56bb340fdd83d8c6bd9';
+  //Endpoint = 'https://api.openweathermap.org/data/2.5/weather?lat=-22.2138900&lon=-49.9458300&lang=pt_br&appid=684092e38c36b56bb340fdd83d8c6bd9&units=metric';
   final apiKey = '684092e38c36b56bb340fdd83d8c6bd9';
   final latitude = '-22.2138900';
   final longitude = '-49.9458300';
@@ -15,7 +15,9 @@ void main() async {
     queryParameters: {
       'lat': latitude,
       'lon': longitude,
+      'lang': 'pt_br',
       'appid': apiKey,
+      'units': 'metric'     
     },
   );
 
@@ -23,7 +25,12 @@ void main() async {
   final response = await dio.get(uri.toString());
 
   if (response.statusCode == 200) {
-    print("Temperatura de ${ kelvinToCelsius( response.data["main"]["temp"] ) } °C " 
+    // print("Temperatura de ${ kelvinToCelsius( response.data["main"]["temp"] ) } °C " 
+    // Se informar o parâmetro 'units': 'metric', a API retorna a temperatura em Celsius
+    // Portanto, não precisa converter.
+    // No campo icon "weather":[{"id":800,"main":"Clear","description":"céu limpo","icon":"01n"}]
+    // demonstra o ícone que pode ser consultado em https://openweathermap.org/weather-conditions
+    print("Temperatura de ${ response.data["main"]["temp"] } °C " 
           "em ${response.data["name"]} "
           "no dia ${timestampToData(response.data["dt"])}");    
   } else {
