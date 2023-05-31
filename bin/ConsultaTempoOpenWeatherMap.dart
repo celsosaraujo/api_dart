@@ -17,7 +17,7 @@ void main() async {
       'lon': longitude,
       'lang': 'pt_br',
       'appid': apiKey,
-      'units': 'metric'     
+      //'units': 'metric'     
     },
   );
 
@@ -30,9 +30,9 @@ void main() async {
     // Portanto, não precisa converter.
     // No campo icon "weather":[{"id":800,"main":"Clear","description":"céu limpo","icon":"01n"}]
     // demonstra o ícone que pode ser consultado em https://openweathermap.org/weather-conditions
-    print("Temperatura de ${ response.data["main"]["temp"] } °C " 
+    print("Temperatura de ${ kelvinToCelsius( response.data["main"]["temp"] ) } °C " 
           "em ${response.data["name"]} "
-          "no dia ${timestampToData(response.data["dt"])}");    
+          "no dia ${timestampUnixToDataHora(response.data["dt"])}");    
   } else {
     print('Erro ao fazer requisição: ${response.statusCode}');
   }
@@ -40,14 +40,18 @@ void main() async {
 }
 
 String kelvinToCelsius(double tempKelvin){
-  double tempCelsius = tempKelvin - 273.00;
+  double tempCelsius = tempKelvin - 273.15;
   return tempCelsius.toStringAsPrecision(4);  
 }
 
-String timestampToData( int timestamp) {
+String timestampUnixToDataHora( int timestamp) {
 
-  DateTime data = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000, isUtc: true);
+  DateTime data = DateTime.
+                    fromMillisecondsSinceEpoch(
+                            timestamp * 1000, isUtc: true
+                            );
   final formatoSaida = intl.DateFormat("dd/MM/yyyy HH:mm"); 
   DateTime dataLocal = data.toLocal();
   return formatoSaida.format(dataLocal);
+
 }

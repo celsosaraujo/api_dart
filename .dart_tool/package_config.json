@@ -170,6 +170,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "petitparser",
+      "rootUri": "file:///C:/Users/celso.saraujo/AppData/Local/Pub/Cache/hosted/pub.dev/petitparser-5.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "pool",
       "rootUri": "file:///C:/Users/celso.saraujo/AppData/Local/Pub/Cache/hosted/pub.dev/pool-1.5.1",
       "packageUri": "lib/",
@@ -296,6 +302,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "xml",
+      "rootUri": "file:///C:/Users/celso.saraujo/AppData/Local/Pub/Cache/hosted/pub.dev/xml-6.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "xml2json",
+      "rootUri": "file:///C:/Users/celso.saraujo/AppData/Local/Pub/Cache/hosted/pub.dev/xml2json-5.3.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "yaml",
       "rootUri": "file:///C:/Users/celso.saraujo/AppData/Local/Pub/Cache/hosted/pub.dev/yaml-3.1.2",
       "packageUri": "lib/",
@@ -308,7 +326,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-05-24T00:32:20.229312Z",
+  "generated": "2023-05-30T22:15:59.132752Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }
