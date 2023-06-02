@@ -33,7 +33,7 @@ Future<List<String>> retornaNomesPaises() async {
     final listaDePaises = XmlDocument.parse(response.body).findAllElements('m:ListOfCountryNamesByNameResult');
     if (listaDePaises.isNotEmpty) {
       final nomeDoPais = listaDePaises.first.innerText
-          .split(',')
+          .split('\n')
           .map((name) => name.trim())
           .toList();
       return nomeDoPais;
